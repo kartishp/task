@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import uid from 'uid'
 import { Consumer } from '../context'
 
-class AddTask extends Component {
+class EditTask extends Component {
     state = {
         task: ''
     }
@@ -17,9 +17,10 @@ class AddTask extends Component {
         e.preventDefault()
         const newTask = {
             task: this.state.task,
-            id: uid()
+            id: this.props.match.params.id
         }
-        dispatch({ type: 'ADD_TASK', payload: newTask })
+        dispatch({ type: 'EDIT_TASK', payload: newTask })
+        this.props.history.push('/')
     }
 
     render() {
@@ -41,4 +42,4 @@ class AddTask extends Component {
     }
 }
 
-export default AddTask
+export default EditTask

@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import ListItem from './ListItem'
+import React, { Component } from 'react';
+import ListItem from './ListItem';
+import { Consumer } from '../context'
 
 class List extends Component {
     onDeleteHandle = (id) => {
@@ -7,13 +8,18 @@ class List extends Component {
     }
 
     render() {
-        const { tasks } = this.props;
         return (
-            <div>
-                {tasks.map((task) => (
-                    <ListItem task={task} key={task.id} onDeleteHandle={this.onDeleteHandle} />
-                ))}
-            </div>
+            <Consumer>
+                {value => {
+                    return (
+                        <div>
+                            {value.tasks.map((task) => (
+                                <ListItem task={task} key={task.id} onDeleteHandle={this.onDeleteHandle} />
+                            ))}
+                        </div>
+                    )
+                }}
+            </Consumer>
         )
     }
 }
